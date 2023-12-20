@@ -16,9 +16,9 @@ const NavbarC = () => {
   const role = JSON.parse(sessionStorage.getItem('role'))
   const [show, setShow] = useState(false);
   const [newProduct, setNewProduct] = useState({
-    titulo:'',
-    precio:0,
-    codigo:'',
+    titulo: '',
+    precio: 0,
+    codigo: '',
   })
 
   const [imagen, setImagen] = useState({})
@@ -34,42 +34,42 @@ const NavbarC = () => {
   }
 
   const handleChange = (ev) => {
-      setNewProduct({...newProduct, [ev.target.name]: ev.target.value})
+    setNewProduct({ ...newProduct, [ev.target.name]: ev.target.value })
   }
 
   const handleChangeImg = (ev) => {
     setImagen(ev.target.files[0]);
   }
 
-  const handleClick = async(ev) => {
+  const handleClick = async (ev) => {
     try {
       ev.preventDefault()
-    const { titulo, precio, codigo } = newProduct
-    if(!titulo || !precio || !codigo){
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Algun campo esta vacio!",
-      });
-    }else{
-  
-      const data = new FormData()
-      data.append('titulo', titulo);
-      data.append('precio', precio);
-      data.append('codigo', codigo);
-      data.append('imagen', imagen);
-      console.log(data)
-      const createProd = await clienteAxios.post('/products', data, config)
-
-      if(createProd.status === 201){
+      const { titulo, precio, codigo } = newProduct
+      if (!titulo || !precio || !codigo) {
         Swal.fire({
-          title: "Producto creado con exito!",
-          icon: "success"
+          icon: "error",
+          title: "Oops...",
+          text: "Algun campo esta vacio!",
         });
+      } else {
+
+        const data = new FormData()
+        data.append('titulo', titulo);
+        data.append('precio', precio);
+        data.append('codigo', codigo);
+        data.append('imagen', imagen);
+        console.log(data)
+        const createProd = await clienteAxios.post('/products', data, config)
+
+        if (createProd.status === 201) {
+          Swal.fire({
+            title: "Producto creado con exito!",
+            icon: "success"
+          });
+        }
       }
-    }
     } catch (error) {
-       console.log(error) 
+      console.log(error)
     }
   }
 
@@ -87,10 +87,10 @@ const NavbarC = () => {
               token && role === 'user'
                 ?
                 <>
-                  <Link to="#link">Sobre Nosotros</Link>
-                  <Link to="#link">Contacto</Link>
-                  <Link to="/fav">Favoritos</Link>
-                  <Link to="/cart">Carrito</Link>
+                  <Link to="#link" className='nav-link'>Sobre Nosotros</Link>
+                  <Link to="#link" className='nav-link'>Contacto</Link>
+                  <Link to="/fav" className='nav-link'>Favoritos</Link>
+                  <Link to="/cart" className='nav-link'>Carrito</Link>
                 </>
                 : token && role === 'admin'
                   ?
@@ -109,22 +109,22 @@ const NavbarC = () => {
                         <Form>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Titulo</Form.Label>
-                            <Form.Control type="text" placeholder="EJ: coca-cola" name='titulo' onChange={handleChange}/>
+                            <Form.Control type="text" placeholder="EJ: coca-cola" name='titulo' onChange={handleChange} />
                           </Form.Group>
 
                           <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Precio</Form.Label>
-                            <Form.Control type="number" placeholder="EJ: $1500" name='precio' onChange={handleChange}/>
+                            <Form.Control type="number" placeholder="EJ: $1500" name='precio' onChange={handleChange} />
                           </Form.Group>
 
                           <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Codigo</Form.Label>
-                            <Form.Control type="text" placeholder="EJ: 6sa54d56d" name='codigo' onChange={handleChange}/>
+                            <Form.Control type="text" placeholder="EJ: 6sa54d56d" name='codigo' onChange={handleChange} />
                           </Form.Group>
 
                           <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Imagen</Form.Label>
-                            <Form.Control type="file" onChange={handleChangeImg}/>
+                            <Form.Control type="file" onChange={handleChangeImg} />
                           </Form.Group>
 
                           <div className='d-flex justify-content-center'>
@@ -138,8 +138,8 @@ const NavbarC = () => {
                   </>
                   :
                   <>
-                    <Link to="#link">Sobre Nosotros</Link>
-                    <Link to="#link">Contacto</Link>
+                    <Link to="#link" className='nav-link'>Sobre Nosotros</Link>
+                    <Link to="#link" className='nav-link'>Contacto</Link>
                   </>
             }
           </Nav>
@@ -151,7 +151,7 @@ const NavbarC = () => {
               </Nav>
               :
               <Nav className="ms-auto">
-                <Link to="/login">Iniciar Sesion</Link>
+                <Link to="/login" className='nav-link'>Iniciar Sesion</Link>
                 <Link to="/register" className='nav-link'>Registrarse</Link>
               </Nav>
           }
