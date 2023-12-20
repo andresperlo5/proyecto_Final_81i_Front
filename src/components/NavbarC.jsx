@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../css/NavbarC.css'
 import ImgC from './ImgC';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -12,6 +12,7 @@ import clienteAxios, { config } from '../helpers/clientAxios';
 import Swal from 'sweetalert2';
 
 const NavbarC = () => {
+  const navigate = useNavigate()
   const token = JSON.parse(sessionStorage.getItem('token'))
   const role = JSON.parse(sessionStorage.getItem('role'))
   const [show, setShow] = useState(false);
@@ -30,7 +31,7 @@ const NavbarC = () => {
   const singOff = () => {
     sessionStorage.removeItem('token')
     sessionStorage.removeItem('role')
-    location.href = '/'
+    navigate('/')
   }
 
   const handleChange = (ev) => {
@@ -58,7 +59,7 @@ const NavbarC = () => {
         data.append('precio', precio);
         data.append('codigo', codigo);
         data.append('imagen', imagen);
-        console.log(data)
+        
         const createProd = await clienteAxios.post('/products', data, config)
 
         if (createProd.status === 201) {

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Swal from "sweetalert2"
 import clienteAxios, { config } from "../helpers/clientAxios"
 
 
 const ProductPage = () => {
   const params = useParams()
+  const navigate = useNavigate()
   const [product, setProduct] = useState({})
   const token = JSON.parse(sessionStorage.getItem('token')) || ''
 
@@ -29,7 +30,7 @@ const ProductPage = () => {
         });
 
         setTimeout(() => {
-          location.href = '/login'
+          navigate('/login')
         }, 3000)
       } else {
         /* const addProdFetch = await fetch(`http://localhost:3001/api/products/cart/${params.id}`,{
@@ -66,7 +67,7 @@ const ProductPage = () => {
         });
 
         setTimeout(() => {
-          location.href = '/login'
+          navigate('/login')
         }, 3000)
       } else {
         const addProduct = await clienteAxios.post(`/products/fav/${params.id}`, {}, config)

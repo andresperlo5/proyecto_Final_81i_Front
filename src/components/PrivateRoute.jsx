@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom"
 
 
 const PrivateRoute = ({children, role}) => {
+  const navigate = useNavigate()
   const token = JSON.parse(sessionStorage.getItem('token'))
   const roleUser = JSON.parse(sessionStorage.getItem('role'))
 
@@ -9,13 +11,13 @@ const PrivateRoute = ({children, role}) => {
       return children
     }else{
       if(roleUser === 'admin'){
-        location.href = '/admin'
+        navigate('/admin')
       }else{
-        location.href = '/user'
+        navigate('/user')
       }
     }
   }else{
-    location.href = '/'
+    navigate('/')
   }
 }
 
