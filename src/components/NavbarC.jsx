@@ -87,16 +87,16 @@ const NavbarC = () => {
               token && role === 'user'
                 ?
                 <>
-                  <Nav.Link href="#link">Sobre Nosotros</Nav.Link>
-                  <Nav.Link href="#link">Contacto</Nav.Link>
-                  <Nav.Link href="/fav">Favoritos</Nav.Link>
-                  <Nav.Link href="/cart">Carrito</Nav.Link>
+                  <Link to="#link">Sobre Nosotros</Link>
+                  <Link to="#link">Contacto</Link>
+                  <Link to="/fav">Favoritos</Link>
+                  <Link to="/cart">Carrito</Link>
                 </>
                 : token && role === 'admin'
                   ?
                   <>
-                    <Nav.Link href="/usersAdmin">Usuarios</Nav.Link>
-                    <Nav.Link href="/productsAdmin">Productos</Nav.Link>
+                    <Link to="/usersAdmin">Usuarios</Link>
+                    <Link to="/productsAdmin">Productos</Link>
                     <Button variant="success" onClick={handleShow}>
                       Crear Producto
                     </Button>
@@ -138,8 +138,8 @@ const NavbarC = () => {
                   </>
                   :
                   <>
-                    <Nav.Link href="#link">Sobre Nosotros</Nav.Link>
-                    <Nav.Link href="#link">Contacto</Nav.Link>
+                    <Link to="#link">Sobre Nosotros</Link>
+                    <Link to="#link">Contacto</Link>
                   </>
             }
           </Nav>
@@ -151,7 +151,7 @@ const NavbarC = () => {
               </Nav>
               :
               <Nav className="ms-auto">
-                <Nav.Link href="/login">Iniciar Sesion</Nav.Link>
+                <Link to="/login">Iniciar Sesion</Link>
                 <Link to="/register" className='nav-link'>Registrarse</Link>
               </Nav>
           }
